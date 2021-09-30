@@ -1,0 +1,191 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "adverseEvents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "organization",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datetime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "concomitants",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "organization",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "startDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "concomitants",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "startDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datetime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ICFDocuments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "organization",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createTime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ICFDocuments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "organization",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "release",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createTime",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "updateTime",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "releaseTime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ICFs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "organization",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createTime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ICFSignatures",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "organization",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "study",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createTime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createTime",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
