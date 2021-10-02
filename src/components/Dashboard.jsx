@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import ChartPage from '../components/ChartPage'
+import DemoChartCards from '../components/DemoChartCards'
 import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
 import { Layout, Form, Menu, Button } from 'antd';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -31,8 +33,10 @@ export default function Dashboard() {
 
 
   return (
-    <Layout style={{ height: '100vh' }}>
-      <Header>Header</Header>
+    <Layout style={{ height: '100vh'}}>
+      <Header style={{backgroundColor: "white"}}>
+        <h1>AIVIE</h1>
+      </Header>
       <Layout>
         <LeftSider></LeftSider>
         <RightContent></RightContent>
@@ -45,13 +49,11 @@ export default function Dashboard() {
 const RightContent = () => {
   return (
     <div>
-      <Content style={{ padding: '50px', alignSelf: 'center' }}>
-        <div>dashboard content</div>
+      <Content style={{ padding: '50px', alignSelf: 'center', width: '100vh' }}>
         <Switch>
-          <Route path="/1" component={Demo1} />
-          <Route path="/2" component={Demo2} />
-          <Route path="/3" component={Demo3} />
-          <Redirect to="/1" />
+          <Route path="/dashboard" component={DemoChartCards} />
+          <Route path="/demoChartCards" component={DemoChartCards} />
+          <Redirect to="/dashboard" />
         </Switch>
       </Content>
     </div>
@@ -60,31 +62,29 @@ const RightContent = () => {
 
 const LeftSider = withRouter(({ history }) => {
   const { logout } = useAuth()
-  const [collapsed, setCollapsed] = useState(false)
 
   const handleLogout = () => {
     logout()
   }
 
   return (
-    <Sider style={{ height: "100vh" }} collapsed={collapsed}>
+    <Sider style={{ height: "100vh" }}>
       <Menu
         mode="inline"
-        defaultSelectedKeys={['/1']}
+        defaultSelectedKeys={['/dashboard']}
       >
-        <Button onClick={e => { setCollapsed(!collapsed) }}>toggle</Button>
-        <Menu.Item key="/1">
-          <Link to="/1" />
-          option1
+        <Menu.Item key="/dashboard">
+          <Link to="/dashboard" />
+          Dashboard
         </Menu.Item>
-        <Menu.Item key="/2">
-          <Link to="/2" />
-          option2
+        <Menu.Item key="/demoChartCards">
+          <Link to="/demoChartCards" />
+          demoChartCards
         </Menu.Item>
-        <Menu.Item key="/3">
+        {/* <Menu.Item key="/3">
           <Link to="/3" />
           option3
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item>
           <Button onClick={handleLogout}>Logout</Button>
         </Menu.Item>
@@ -92,27 +92,3 @@ const LeftSider = withRouter(({ history }) => {
     </Sider>
   );
 })
-
-const Demo1 = () => {
-  return (
-    <div>
-      demo1
-    </div>
-  );
-}
-
-const Demo2 = () => {
-  return (
-    <div>
-      demo2
-    </div>
-  );
-}
-
-const Demo3 = () => {
-  return (
-    <div>
-      demo3
-    </div>
-  );
-}
