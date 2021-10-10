@@ -1,6 +1,6 @@
 import React from 'react';
 import { Line } from '@ant-design/charts';
-import { ChartCard, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
+// import { ChartCard, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
 
 
 const ChartPage = () => {

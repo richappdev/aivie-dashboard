@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import ChartPage from '../components/ChartPage'
 import DemoChartCards from '../components/DemoChartCards'
+import DemoLine from '../components/DemoLine'
 import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
 import { Layout, Form, Menu, Button } from 'antd';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css';
 
 const { Header, Footer, Content, Sider } = Layout;
@@ -33,15 +33,14 @@ export default function Dashboard() {
 
 
   return (
-    <Layout style={{ height: '100vh'}}>
-      <Header style={{backgroundColor: "white"}}>
-        <h1>AIVIE</h1>
+    <Layout style={{ height: '100vh' }}>
+      <Header style={{ backgroundColor: "#E5BFCB" }}>
+        <h1 style={{ color: "#FFF" }}>AIVIE</h1>
       </Header>
       <Layout>
         <LeftSider></LeftSider>
         <RightContent></RightContent>
       </Layout>
-      <Footer>Footer</Footer>
     </Layout>
   )
 }
@@ -52,7 +51,8 @@ const RightContent = () => {
       <Content style={{ padding: '50px', alignSelf: 'center', width: '100vh' }}>
         <Switch>
           <Route path="/dashboard" component={DemoChartCards} />
-          <Route path="/demoChartCards" component={DemoChartCards} />
+          <Route path="/demoChartCards" component={DemoLine} />
+          <Route pathd="/demoLines" component={DemoLine} />
           <Redirect to="/dashboard" />
         </Switch>
       </Content>
@@ -68,7 +68,7 @@ const LeftSider = withRouter(({ history }) => {
   }
 
   return (
-    <Sider style={{ height: "100vh" }}>
+    <Sider style={{ height: "100vh", background: "#EFD3DF"}}>
       <Menu
         mode="inline"
         defaultSelectedKeys={['/dashboard']}
