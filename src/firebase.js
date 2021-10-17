@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import "firebase/auth"
 
 const app = firebase.initializeApp({
@@ -12,6 +12,24 @@ const app = firebase.initializeApp({
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 })
 
+const db = app.firestore()
+const icfDocumentCollection = db.collection('ICFDocuments')
+const subjectCollection = db.collection('subjects')
+const studyId = process.env.REACT_APP_AIVIE_STUDY
+
+export const loadSubjects = async () => {
+    const subjects = await (await subjectCollection.where('study', '==', studyId).get())
+        .docs.map(doc => ({ key: doc.id, ...doc.data() }))
+    console.log(subjects);
+    return subjects
+}
+
+export const loadIcfDocuments = async () => {
+    const documents = await (await icfDocumentCollection.where('study', '==', studyId).get())
+        .docs.map(doc => ({ key: doc.id, ...doc.data() }))
+    console.log(documents);
+    return documents
+}
 
 export const auth = app.auth()
 export default app
