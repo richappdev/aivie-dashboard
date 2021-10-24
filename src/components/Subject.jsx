@@ -26,11 +26,17 @@ export default function Subject() {
       width: '30%',
     },
     {
+      title: 'Logged In',
+      dataIndex: 'fcmToken',
+      key: 'fcmToken',
+      render: token => <a>{token === "" || token == null ? "false" : "true"}</a>,
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, subject) => (
         <Space size="middle">
-          <a onClick={() => setSelectedSubject(subject)}>Send message</a>
+          <a onClick={() => setSelectedSubject(subjects.filter(s => s == subject))}>Send message</a>
         </Space>
       ),
       width: '20%',
@@ -43,8 +49,10 @@ export default function Subject() {
   const [messageForm] = Form.useForm();
 
   const sendMessage = (notificationData) => {
+    const tokens = selectedSubject.map(s => s.fcmToken)
+    console.log(tokens);
     sendCloudMessage({
-      tokens: [selectedSubject.fcmToken],
+      tokens: tokens,
       notification: notificationData
     }).then((value) => {
       setSendingMessage(false)
@@ -66,9 +74,11 @@ export default function Subject() {
 
   return (
     <>
+      <Button onClick={() => setSelectedSubject(subjects)}>
+        Send Message to subjects</Button>
       <Table style={{ width: "100vh" }} columns={columns} dataSource={subjects} />
       <Modal
-        title={`Send message to ${selectedSubject && selectedSubject.name}`}
+        title={`Send message`}
         style={{ top: 20 }}
         visible={selectedSubject}
         onOk={() => setSelectedSubject(null)}
@@ -76,6 +86,10 @@ export default function Subject() {
         okButtonProps={{ disabled: sendingMessage }}
         cancelButtonProps={{ disabled: sendingMessage }}
       >
+        <div>Send List:</div>
+        {selectedSubject && selectedSubject.map(subject => (
+          <div>{subject.name}</div>
+        ))}
         <Form
           name="basic"
           form={messageForm}
