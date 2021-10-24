@@ -10,7 +10,7 @@ export default function Subject() {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <a>{text}</a>,
+      render: text => <div>{text}</div>,
       width: '20%',
     },
     {
@@ -29,15 +29,15 @@ export default function Subject() {
       title: 'Logged In',
       dataIndex: 'fcmToken',
       key: 'fcmToken',
-      render: token => <a>{token === "" || token == null ? "false" : "true"}</a>,
+      render: token => <div>{token === "" || token == null ? "false" : "true"}</div>,
     },
     {
       title: 'Action',
       key: 'action',
       render: (text, subject) => (
-        <Space size="middle">
-          <a onClick={() => setSelectedSubject(subjects.filter(s => s == subject))}>Send message</a>
-        </Space>
+        <Button type="primary"
+          onClick={() => setSelectedSubject(subjects.filter(s => s == subject))}>
+          Send message</Button>
       ),
       width: '20%',
     },
@@ -74,8 +74,10 @@ export default function Subject() {
 
   return (
     <>
-      <Button onClick={() => setSelectedSubject(subjects)}>
+      <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
         Send Message to subjects</Button>
+      <br />
+      <br />
       <Table style={{ width: "100vh" }} columns={columns} dataSource={subjects} />
       <Modal
         title={`Send message`}

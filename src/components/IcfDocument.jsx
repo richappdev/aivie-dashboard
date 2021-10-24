@@ -1,4 +1,4 @@
-import { Table, Space } from 'antd';
+import { Table, Button, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import { loadIcfDocuments } from '../firebase';
 
@@ -11,27 +11,29 @@ const columns = [
     width: '20%',
   },
   {
-    title: 'Release',
+    title: 'Release Time',
     dataIndex: 'releaseTime',
     key: 'releaseTime',
+    render: date => <div>{date.toDate().toString()}</div>,
     width: '30%',
   },
   {
     title: 'Version',
     dataIndex: 'version',
     key: 'version',
+    width: '10%',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <div>
+        <Button type="primary">Edit</Button>
+        <Button type="primary" danger>Delete</Button>
+      </div>
+    ),
     width: '30%',
   },
-  // {
-  //   title: 'Action',
-  //   key: 'action',
-  //   render: (text, record) => (
-  //     <Space size="middle">
-  //       <a>Send message</a>
-  //     </Space>
-  //   ),
-  //   width: '20%',
-  // },
 ];
 
 export default function IcfDocument() {

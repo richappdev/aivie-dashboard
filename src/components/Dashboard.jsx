@@ -8,6 +8,7 @@ import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
 import { Layout, Form, Menu, Button } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css';
+import '../App.css';
 
 const { Header, Footer, Content, Sider } = Layout;
 

@@ -1,0 +1,8 @@
+.ant-menu-item-selected {
+  background-color: #e0adbe42 !important;
+  border-right-style: none;
+}
+
+.ant-menu-inline {
+  border: none;
+}

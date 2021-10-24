@@ -30,7 +30,7 @@ const DemoChartCards = () => {
   ]
 
   return (
-    <Row style={{width: "100vh"}}>
+    <Row style={{ width: "100vh" }}>
       <Col span={24}>
         <ChartCard title="用藥遵循率" contentHeight={134}>
           <NumberInfo
