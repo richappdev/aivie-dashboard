@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import DemoChartCards from '../components/DemoChartCards'
-import DemoLine from '../components/DemoLine'
-import Subject from '../components/Subject'
-import IcfDocument from '../components/IcfDocument'
+import Subject from './Subject'
+import IcfDocument from './IcfDocument'
 import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
 import { Layout, Form, Menu, Button } from 'antd';
 import { Switch, Route } from 'react-router-dom'
@@ -12,7 +10,7 @@ import '../App.css';
 
 const { Header, Footer, Content, Sider } = Layout;
 
-export default function Dashboard() {
+export default function Home() {
   const [form] = Form.useForm()
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
@@ -53,8 +51,6 @@ const RightContent = () => {
     <div>
       <Content style={{ padding: '50px', alignSelf: 'center'}}>
         <Switch>
-          <Route path="/dashboard" component={DemoChartCards} />
-          <Route path="/demoChartCards" component={DemoLine} />
           <Route path="/subjects" component={Subject} />
           <Route path="/icfDocuments" component={IcfDocument} />
           <Redirect to="/dashboard" />
@@ -77,14 +73,6 @@ const LeftSider = withRouter(({ history }) => {
         mode="inline"
         defaultSelectedKeys={['/dashboard']}
       >
-        <Menu.Item key="dashboard">
-          <Link to="/dashboard" />
-          Dashboard
-        </Menu.Item>
-        <Menu.Item key="demoChartCards">
-          <Link to="/demoChartCards" />
-          demoChartCards
-        </Menu.Item>
         <Menu.Item key="subjects">
           <Link to="/subjects" />
           Subjects
