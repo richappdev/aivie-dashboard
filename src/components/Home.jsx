@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import Dashboard from './Dashboard'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
 import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
@@ -8,7 +9,7 @@ import { Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import '../App.css';
 
-const { Header, Footer, Content, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 export default function Home() {
   const [form] = Form.useForm()
@@ -49,8 +50,9 @@ export default function Home() {
 const RightContent = () => {
   return (
     <div>
-      <Content style={{ padding: '50px', alignSelf: 'center'}}>
+      <Content style={{ width: "1200px", padding: '24px', alignSelf: 'center' }}>
         <Switch>
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/subjects" component={Subject} />
           <Route path="/icfDocuments" component={IcfDocument} />
           <Redirect to="/dashboard" />
@@ -68,11 +70,15 @@ const LeftSider = withRouter(({ history }) => {
   }
 
   return (
-    <Sider style={{ height: "100vh", background: "#EFD3DF"}}>
+    <Sider style={{ height: "100vh", background: "#EFD3DF" }}>
       <Menu
         mode="inline"
         defaultSelectedKeys={['/dashboard']}
       >
+        <Menu.Item key="dashboard">
+          <Link to="/dashboard" />
+          Dashboard
+        </Menu.Item>
         <Menu.Item key="subjects">
           <Link to="/subjects" />
           Subjects
