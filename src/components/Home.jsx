@@ -51,7 +51,7 @@ export default function Home() {
 const RightContent = () => {
   return (
     <div>
-      <Content style={{ width: "1500px", padding: '24px', alignSelf: 'center' }}>
+      <Content style={{ width: "1200px", padding: '24px', alignSelf: 'center' }}>
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/subjects" component={Subject} />

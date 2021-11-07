@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Steps, Row, Col, Space } from 'antd';
-import { UserOutlined, SolutionOutlined, LoadingOutlined, SmileOutlined } from '@ant-design/icons';
 import PatientImprovementCard from './PatientImprovementCard';
 
 const { Step } = Steps;
@@ -19,6 +18,6 @@ export default function PatientDetail() {
         </Steps>
       </Card>
       <PatientImprovementCard></PatientImprovementCard>
-      <Card size="small" title="AE Dosing Log"></Card>
+      <Card style={{ height: 100 }} size="small" title="AE Dosing Log"></Card>
     </Space>)
 }
