@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import Dashboard from './Dashboard'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
+import SiteOverview from './SiteOverview'
 import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
 import { Layout, Form, Menu, Button } from 'antd';
 import { Switch, Route } from 'react-router-dom'
@@ -50,10 +51,11 @@ export default function Home() {
 const RightContent = () => {
   return (
     <div>
-      <Content style={{ width: "1200px", padding: '24px', alignSelf: 'center' }}>
+      <Content style={{ width: "1500px", padding: '24px', alignSelf: 'center' }}>
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/subjects" component={Subject} />
+          <Route path="/site_overview" component={SiteOverview} />
           <Route path="/icfDocuments" component={IcfDocument} />
           <Redirect to="/dashboard" />
         </Switch>
@@ -70,7 +72,7 @@ const LeftSider = withRouter(({ history }) => {
   }
 
   return (
-    <Sider style={{ height: "100vh", background: "#EFD3DF" }}>
+    <Sider style={{ height: "auto", background: "#EFD3DF" }}>
       <Menu
         mode="inline"
         defaultSelectedKeys={['/dashboard']}
@@ -81,7 +83,11 @@ const LeftSider = withRouter(({ history }) => {
         </Menu.Item>
         <Menu.Item key="subjects">
           <Link to="/subjects" />
-          Subjects
+          Patient Overview
+        </Menu.Item>
+        <Menu.Item key="site_overview">
+          <Link to="/site_overview" />
+          Site Overview
         </Menu.Item>
         <Menu.Item key="icfDocuments">
           <Link to="/icfDocuments" />

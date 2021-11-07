@@ -2,6 +2,7 @@ import { Table, Modal, Button, Space, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { loadSubjects } from '../firebase';
 import { sendCloudMessage } from '../cloud_function';
+import PatientDetail from './PatientDetail';
 
 export default function Subject() {
 
@@ -11,19 +12,16 @@ export default function Subject() {
       dataIndex: 'name',
       key: 'name',
       render: text => <div>{text}</div>,
-      width: '20%',
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      width: '30%',
     },
     {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
-      width: '30%',
     },
     {
       title: 'Logged In',
@@ -39,7 +37,6 @@ export default function Subject() {
           onClick={() => setSelectedSubject(subjects.filter(s => s == subject))}>
           Send message</Button>
       ),
-      width: '20%',
     },
   ];
 
@@ -74,11 +71,16 @@ export default function Subject() {
 
   return (
     <>
-      <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
+      {/* <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
         Send Message to subjects</Button>
       <br />
-      <br />
-      <Table style={{ width: "100vh" }} columns={columns} dataSource={subjects} />
+      <br /> */}
+      <h2>Patient Overview</h2>
+      <Table style={{ width: "1200px" }} columns={columns} dataSource={subjects}
+        expandable={{
+          expandedRowRender: record => <PatientDetail></PatientDetail>,
+          rowExpandable: record => record.name !== 'Not Expandable',
+        }} />
       <Modal
         title={`Send message`}
         style={{ top: 20 }}
