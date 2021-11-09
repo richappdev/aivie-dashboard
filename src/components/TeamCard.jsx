@@ -1,10 +1,11 @@
 import React from 'react'
-import { Card, Divider, Button } from 'antd';
+import { Card, Avatar, Button } from 'antd';
+import { UserOutlined } from "@ant-design/icons"
 
 export default function TeamCard({ ...props }) {
   console.log(props.size);
   let avatarList = [];
-  for (let i = 0; i < props.size; i++) avatarList.push(<DefaultAvatar />)
+  for (let i = 0; i < props.size; i++) avatarList.push(<Avatar size="small" icon={<UserOutlined />} />)
 
   return (
     <Card size="small" title="Team">
@@ -27,9 +28,4 @@ export default function TeamCard({ ...props }) {
       </div>
     </Card>
   )
-}
-
-const DefaultAvatar = () => {
-  return (<img width="30"
-    src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" />)
 }

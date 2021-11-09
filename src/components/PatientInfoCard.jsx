@@ -1,15 +1,15 @@
 import React from 'react'
-import { Card, Divider, Button } from 'antd';
+import { Card, Divider, Avatar, Button } from 'antd';
+import { UserOutlined } from "@ant-design/icons"
 
 export default function PatientInfoCard({ ...props }) {
-  const { name, gender, age, id, contact } = props.info
+  const { name, gender, age, id, contact, photo } = props.info
   return (
     <>
-      <Card size="small" title="Patient Info">
+      <Card style={{ ...props.style }} size="small" title="Patient Info">
         <div>
           <center>
-            <img width="100"
-              src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" />
+            <Avatar src={photo} size={64} icon={<UserOutlined />} />
           </center>
           <h2 style={{ textAlign: "center" }}>{name}</h2>
         </div>

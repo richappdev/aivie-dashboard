@@ -1,4 +1,4 @@
-import { Card, Row, Col, Statistic } from "antd"
+import { Card, Row, Col, Statistic, Space } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
 import { RingProgress, Progress } from '@ant-design/charts';
 
@@ -32,33 +32,39 @@ export default function SiteOverview() {
     <h2>Site Overview</h2>
     <Row gutter={[8, 8]}>
       <Col span={4}>
-        <Card title="Organizations">
-          <p>NTUH</p>
-          <p>NTUH</p>
-        </Card>
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Card title="Organizations">
+            <p>NTUH</p>
+            <p>NTUH</p>
+          </Card>
+        </Space>
       </Col>
       <Col span={10}>
-        <Card title="Patient">
-          <Row>
-            <Statistic title="Target Progress" value={5} suffix="/ 10" />
-            <RingProgress {...patientConfig} />
-          </Row>
-        </Card>
-        <Card title="Adverse Event">
-          <Bar height={200} data={salesData} />
-        </Card>
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Card title="Patient">
+            <Row>
+              <Statistic title="Target Progress" value={5} suffix="/ 10" />
+              <RingProgress {...patientConfig} />
+            </Row>
+          </Card>
+          <Card title="Adverse Event">
+            <Bar height={200} data={salesData} />
+          </Card>
+        </Space>
       </Col>
       <Col span={10}>
-        <Card title="ICF">
-          <Statistic title="V2" value={3} suffix="/ 10" />
-          <Progress {...icfConfig} />
-          <Statistic title="V3" value={5} suffix="/ 10" />
-          <Progress {...icfConfig} />
-        </Card>
-        <Card title="Deviation">
-          <Bar height={200} data={salesData} />
-        </Card>
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Card title="ICF">
+            <Statistic title="V2" value={3} suffix="/ 10" />
+            <Progress {...icfConfig} />
+            <Statistic title="V3" value={5} suffix="/ 10" />
+            <Progress {...icfConfig} />
+          </Card>
+          <Card title="Deviation">
+            <Bar height={200} data={salesData} />
+          </Card>
+        </Space>
       </Col>
-    </Row>,
+    </Row>
   </div>)
 }

@@ -9,6 +9,7 @@ import { Layout, Form, Menu, Button } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import '../App.css';
+import StudyOverview from './StudyOverview'
 
 const { Header, Content, Sider } = Layout;
 
@@ -53,11 +54,12 @@ const RightContent = () => {
     <div>
       <Content style={{ width: "1200px", padding: '24px', alignSelf: 'center' }}>
         <Switch>
-          <Route path="/dashboard" component={Dashboard} />
+          {/* <Route path="/dashboard" component={Dashboard} /> */}
           <Route path="/subjects" component={Subject} />
+          <Route path="/study_overview" component={StudyOverview} />
           <Route path="/site_overview" component={SiteOverview} />
-          <Route path="/icfDocuments" component={IcfDocument} />
-          <Redirect to="/dashboard" />
+          <Route path="/icf_documents" component={IcfDocument} />
+          <Redirect to="/subjects" />
         </Switch>
       </Content>
     </div>
@@ -77,20 +79,24 @@ const LeftSider = withRouter(({ history }) => {
         mode="inline"
         defaultSelectedKeys={['/dashboard']}
       >
-        <Menu.Item key="dashboard">
+        {/* <Menu.Item key="dashboard">
           <Link to="/dashboard" />
           Dashboard
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="subjects">
           <Link to="/subjects" />
           Patient Overview
+        </Menu.Item>
+        <Menu.Item key="study_overview">
+          <Link to="/study_overview" />
+          Study Overview
         </Menu.Item>
         <Menu.Item key="site_overview">
           <Link to="/site_overview" />
           Site Overview
         </Menu.Item>
-        <Menu.Item key="icfDocuments">
-          <Link to="/icfDocuments" />
+        <Menu.Item key="icf_documents">
+          <Link to="/icf_documents" />
           ICF Documents
         </Menu.Item>
         <Menu.Item key="logout">

@@ -1,9 +1,10 @@
-import { Table, Modal, Button, Form, Input } from 'antd';
+import { Table, Modal, Row, Col, Button, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { loadSubjects } from '../firebase';
 import { sendCloudMessage } from '../cloud_function';
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import PatientDetail from './PatientDetail';
+import PatientInfoCard from './PatientInfoCard';
 
 export default function Subject() {
 
@@ -80,19 +81,26 @@ export default function Subject() {
       <br />
       <br /> */}
       <h2>Patient Overview</h2>
-      <Table style={{ width: "1200px" }} columns={columns} dataSource={subjects}
-        loading={loading}
-        expandable={{
-          expandedRowRender: record => <PatientDetail></PatientDetail>,
-          rowExpandable: record => record.name !== 'Not Expandable',
-          expandIcon: ({ expanded, onExpand, record }) =>
-            expanded ? (
-              <CaretDownOutlined onClick={(e) => onExpand(record, e)} />
-            ) : (
-              <CaretRightOutlined onClick={(e) => onExpand(record, e)} />
-            )
-        }}
-      />
+      <Row>
+        {/* <Col>
+          <PatientInfoCard style={{ width: "200px" }} info={{}}></PatientInfoCard>
+        </Col> */}
+        <Col>
+          <Table columns={columns} dataSource={subjects}
+            loading={loading}
+            expandable={{
+              expandedRowRender: record => <PatientDetail></PatientDetail>,
+              rowExpandable: record => record.name !== 'Not Expandable',
+              expandIcon: ({ expanded, onExpand, record }) =>
+                expanded ? (
+                  <CaretDownOutlined onClick={(e) => onExpand(record, e)} />
+                ) : (
+                  <CaretRightOutlined onClick={(e) => onExpand(record, e)} />
+                )
+            }}
+          />
+        </Col>
+      </Row>
       <Modal
         title={`Send message`}
         style={{ top: 20 }}
