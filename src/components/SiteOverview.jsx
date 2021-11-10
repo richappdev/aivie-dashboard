@@ -1,6 +1,7 @@
-import { Card, Row, Col, Statistic, Space } from "antd"
+import { Card, Row, Col, Statistic, Space, Button } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
 import { RingProgress, Progress } from '@ant-design/charts';
+import { DownloadOutlined } from "@ant-design/icons"
 
 export default function SiteOverview() {
   const patientConfig = {
@@ -29,12 +30,14 @@ export default function SiteOverview() {
   }
 
   return (<div>
-    <h2>Site Overview</h2>
     <Row gutter={[8, 8]}>
+      <Col span={22}><h2>Site Overview</h2></Col>
+      <Col span={2}>
+        <Button type="primary"><DownloadOutlined /></Button>
+      </Col>
       <Col span={4}>
         <Space direction="vertical" style={{ width: "100%" }}>
           <Card title="Organizations">
-            <p>NTUH</p>
             <p>NTUH</p>
           </Card>
         </Space>
