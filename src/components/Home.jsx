@@ -4,12 +4,13 @@ import { useAuth } from '../context/AuthContext'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
 import SiteOverview from './SiteOverview'
+import StudyOverview from './StudyOverview'
+import PermissionTable from './PermissionTable'
 import { Link, Redirect, withRouter } from 'react-router-dom'
 import { Layout, Menu, Button } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import '../App.css';
-import StudyOverview from './StudyOverview'
 
 const { Header, Content, Sider } = Layout;
 
@@ -55,6 +56,7 @@ const RightContent = () => {
       <Content style={{ padding: '24px', alignSelf: 'center' }}>
         <Switch>
           {/* <Route path="/dashboard" component={Dashboard} /> */}
+          <Route path="/permission" component={PermissionTable} />
           <Route path="/subjects" component={Subject} />
           <Route path="/study_overview" component={StudyOverview} />
           <Route path="/site_overview" component={SiteOverview} />
@@ -83,6 +85,10 @@ const LeftSider = withRouter(({ history }) => {
           <Link to="/dashboard" />
           Dashboard
         </Menu.Item> */}
+        <Menu.Item key="permission">
+          <Link to="/permission" />
+          Permission
+        </Menu.Item>
         <Menu.Item key="subjects">
           <Link to="/subjects" />
           Patient Overview
