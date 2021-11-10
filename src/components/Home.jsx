@@ -52,19 +52,17 @@ export default function Home() {
 
 const RightContent = () => {
   return (
-    <div>
-      <Content style={{ padding: '24px', alignSelf: 'center' }}>
-        <Switch>
-          {/* <Route path="/dashboard" component={Dashboard} /> */}
-          <Route path="/permission" component={PermissionTable} />
-          <Route path="/subjects" component={Subject} />
-          <Route path="/study_overview" component={StudyOverview} />
-          <Route path="/site_overview" component={SiteOverview} />
-          <Route path="/icf_documents" component={IcfDocument} />
-          <Redirect to="/subjects" />
-        </Switch>
-      </Content>
-    </div>
+    <Content style={{ width: "100%", padding: '24px', alignSelf: 'center' }}>
+      <Switch>
+        {/* <Route path="/dashboard" component={Dashboard} /> */}
+        <Route path="/permission" component={PermissionTable} />
+        <Route path="/subjects" component={Subject} />
+        <Route path="/study_overview" component={StudyOverview} />
+        <Route path="/site_overview" component={SiteOverview} />
+        <Route path="/icf_documents" component={IcfDocument} />
+        <Redirect to="/subjects" />
+      </Switch>
+    </Content>
   );
 }
 
