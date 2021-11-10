@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Steps, Row, Col, Space } from 'antd';
+import { Card, Steps, Space } from 'antd';
 import PatientImprovementCard from './PatientImprovementCard';
 
 const { Step } = Steps;

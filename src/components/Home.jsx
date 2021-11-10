@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAuth } from '../context/AuthContext'
-import Dashboard from './Dashboard'
+// import Dashboard from './Dashboard'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
 import SiteOverview from './SiteOverview'
-import { Link, Redirect, useHistory, withRouter } from 'react-router-dom'
-import { Layout, Form, Menu, Button } from 'antd';
+import { Link, Redirect, withRouter } from 'react-router-dom'
+import { Layout, Menu, Button } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import '../App.css';
@@ -14,30 +14,30 @@ import StudyOverview from './StudyOverview'
 const { Header, Content, Sider } = Layout;
 
 export default function Home() {
-  const [form] = Form.useForm()
-  const [error, setError] = useState()
-  const [loading, setLoading] = useState(false)
-  const { login, currentUser } = useAuth()
-  const history = useHistory()
+  // const [form] = Form.useForm()
+  // const [error, setError] = useState()
+  // const [loading, setLoading] = useState(false)
+  // const { login, currentUser } = useAuth()
+  // const history = useHistory()
 
-  async function onFinish(values) {
-    console.log(values);
+  // async function onFinish(values) {
+  //   console.log(values);
 
-    try {
-      setError('')
-      setLoading(true)
-      await login(values.account, values.password)
-      history.push("/")
-    } catch (e) {
-      setError(e.message)
-    }
+  //   try {
+  //     setError('')
+  //     setLoading(true)
+  //     await login(values.account, values.password)
+  //     history.push("/")
+  //   } catch (e) {
+  //     setError(e.message)
+  //   }
 
-    setLoading(false)
-  }
+  //   setLoading(false)
+  // }
 
 
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout>
       <Header style={{ backgroundColor: "#E5BFCB" }}>
         <h1 style={{ color: "#FFF" }}>AIVIE</h1>
       </Header>
@@ -52,7 +52,7 @@ export default function Home() {
 const RightContent = () => {
   return (
     <div>
-      <Content style={{ width: "1200px", padding: '24px', alignSelf: 'center' }}>
+      <Content style={{ padding: '24px', alignSelf: 'center' }}>
         <Switch>
           {/* <Route path="/dashboard" component={Dashboard} /> */}
           <Route path="/subjects" component={Subject} />

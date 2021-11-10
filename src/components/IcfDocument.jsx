@@ -1,4 +1,4 @@
-import { Table, Button, Space } from 'antd';
+import { Table, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { loadIcfDocuments } from '../firebase';
 
@@ -7,7 +7,7 @@ const columns = [
     title: 'ID',
     dataIndex: 'key',
     key: 'key',
-    render: text => <a>{text}</a>,
+    render: text => <div>{text}</div>,
     width: '20%',
   },
   {

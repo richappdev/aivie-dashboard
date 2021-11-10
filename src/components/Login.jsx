@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Layout, Card, Input, Form, Button } from 'antd';
 import 'antd/dist/antd.css';
 
 const { Header, Footer, Content } = Layout;
 
 export default function Login() {
-  const [ form ] = Form.useForm()
+  const [form] = Form.useForm()
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
   const { login } = useAuth()
@@ -42,7 +42,7 @@ export default function Login() {
               <Input.Password size="large" placeholder="password"></Input.Password>
             </Form.Item>
             <Form.Item>
-            <Button style={{width: 300}} type="primary" htmlType="submit" disabled={loading}>Login</Button>
+              <Button style={{ width: 300 }} type="primary" htmlType="submit" disabled={loading}>Login</Button>
             </Form.Item>
           </Form>
         </Card>

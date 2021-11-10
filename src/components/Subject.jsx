@@ -4,7 +4,6 @@ import { loadSubjects } from '../firebase';
 import { sendCloudMessage } from '../cloud_function';
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import PatientDetail from './PatientDetail';
-import PatientInfoCard from './PatientInfoCard';
 
 export default function Subject() {
 
@@ -36,7 +35,7 @@ export default function Subject() {
       key: 'action',
       render: (text, subject) => (
         <Button type="primary"
-          onClick={() => setSelectedSubject(subjects.filter(s => s == subject))}>
+          onClick={() => setSelectedSubject(subjects.filter(s => s === subject))}>
           Send message</Button>
       ),
     },

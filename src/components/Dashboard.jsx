@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Tabs } from 'antd';
 import CaseInfo from '../components/CaseInfo';
 const { TabPane } = Tabs;
