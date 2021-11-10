@@ -25,12 +25,6 @@ export default function Subject() {
       key: 'address',
     },
     {
-      title: 'Logged In',
-      dataIndex: 'fcmToken',
-      key: 'fcmToken',
-      render: token => <div>{token === "" || token == null ? "false" : "true"}</div>,
-    },
-    {
       title: 'Action',
       key: 'action',
       render: (text, subject) => (
