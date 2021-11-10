@@ -21,10 +21,17 @@ export default function SiteOverview() {
     color: ['#5B8FF9', '#E8EDF3'],
   };
 
-  const salesData = [];
+  const adverseEventData = [];
   for (let i = 0; i < 12; i += 1) {
-    salesData.push({
+    adverseEventData.push({
       x: `AE${i + 1}`,
+      y: Math.floor(Math.random() * 1000) + 200,
+    });
+  }
+  const deviationData = [];
+  for (let i = 0; i < 12; i += 1) {
+    deviationData.push({
+      x: `DV${i + 1}`,
       y: Math.floor(Math.random() * 1000) + 200,
     });
   }
@@ -40,6 +47,10 @@ export default function SiteOverview() {
           <Card title="Organizations">
             <p>NTUH</p>
           </Card>
+          <Card title="Study Team">
+            <p>Study Team1</p>
+            <p>Study Team2</p>
+          </Card>
         </Space>
       </Col>
       <Col span={10}>
@@ -51,7 +62,7 @@ export default function SiteOverview() {
             </Row>
           </Card>
           <Card title="Adverse Event">
-            <Bar height={200} data={salesData} />
+            <Bar height={200} data={adverseEventData} />
           </Card>
         </Space>
       </Col>
@@ -64,7 +75,7 @@ export default function SiteOverview() {
             <Progress {...icfConfig} />
           </Card>
           <Card title="Deviation">
-            <Bar height={200} data={salesData} />
+            <Bar height={200} data={deviationData} />
           </Card>
         </Space>
       </Col>

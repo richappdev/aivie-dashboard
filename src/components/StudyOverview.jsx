@@ -22,10 +22,17 @@ export default function StudyOverview() {
     color: ['#5B8FF9', '#E8EDF3'],
   };
 
-  const salesData = [];
+  const adverseEventData = [];
   for (let i = 0; i < 12; i += 1) {
-    salesData.push({
+    adverseEventData.push({
       x: `AE${i + 1}`,
+      y: Math.floor(Math.random() * 1000) + 200,
+    });
+  }
+  const deviationData = [];
+  for (let i = 0; i < 12; i += 1) {
+    deviationData.push({
+      x: `DV${i + 1}`,
       y: Math.floor(Math.random() * 1000) + 200,
     });
   }
@@ -98,12 +105,12 @@ export default function StudyOverview() {
         <Row style={{ width: "100%" }}>
           <Col span={12}>
             <Card title="Adverse Event">
-              <Bar height={200} data={salesData} />
+              <Bar height={200} data={adverseEventData} />
             </Card>
           </Col>
           <Col span={12}>
             <Card title="Deviation">
-              <Bar height={200} data={salesData} />
+              <Bar height={200} data={deviationData} />
             </Card>
           </Col>
         </Row>
