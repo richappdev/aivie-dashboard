@@ -80,7 +80,13 @@ export default function StudyOverview() {
           </Col>
           <Col span={12}>
             <Card title="Study Achieve" style={{ height: "100%" }}>
-              <Statistic title="Target Progress" value={5} suffix="/ 10" />
+              <Statistic
+                title="Study Achieve"
+                value={11.28}
+                precision={2}
+                // valueStyle={{ color: '#3f8600' }}
+                suffix="%"
+              />
             </Card>
           </Col>
         </Row>
@@ -167,11 +173,21 @@ const PatientPieChart = () => {
     },
     interactions: [{ type: 'element-selected' }, { type: 'element-active' }],
   };
+  const style = { height: "200px", width: "33%" }
   return (<Card title="Patient">
     <Row>
-      <Pie style={{ width: "33%" }} data={ageData} {...config} />
-      <Pie style={{ width: "33%" }} data={genderData} {...config} />
-      <Pie style={{ width: "33%" }} data={ethnicsData} {...config} />
+      <Col style={style}>
+        <strong>Age</strong>
+        <Pie data={ageData} {...config} />
+      </Col>
+      <Col style={style}>
+        <strong>Gender</strong>
+        <Pie data={genderData} {...config} />
+      </Col>
+      <Col style={style}>
+        <strong>Ethnics</strong>
+        <Pie data={ethnicsData} {...config} />
+      </Col>
     </Row>
   </Card>)
 }
