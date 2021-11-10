@@ -73,33 +73,31 @@ export default function Subject() {
   }, []);
 
   return (
-    <>
+    <Row>
       {/* 先隱藏群發按鈕 */}
       {/* <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
         Send Message to subjects</Button>
       <br />
       <br /> */}
       <h2>Patient Overview</h2>
-      <Row>
-        {/* <Col>
+      {/* <Col>
           <PatientInfoCard style={{ width: "200px" }} info={{}}></PatientInfoCard>
         </Col> */}
-        <Col>
-          <Table columns={columns} dataSource={subjects}
-            loading={loading}
-            expandable={{
-              expandedRowRender: record => <PatientDetail></PatientDetail>,
-              rowExpandable: record => record.name !== 'Not Expandable',
-              expandIcon: ({ expanded, onExpand, record }) =>
-                expanded ? (
-                  <CaretDownOutlined onClick={(e) => onExpand(record, e)} />
-                ) : (
-                  <CaretRightOutlined onClick={(e) => onExpand(record, e)} />
-                )
-            }}
-          />
-        </Col>
-      </Row>
+      <Col span={24}>
+        <Table columns={columns} dataSource={subjects}
+          loading={loading}
+          expandable={{
+            expandedRowRender: record => <PatientDetail></PatientDetail>,
+            rowExpandable: record => record.name !== 'Not Expandable',
+            expandIcon: ({ expanded, onExpand, record }) =>
+              expanded ? (
+                <CaretDownOutlined onClick={(e) => onExpand(record, e)} />
+              ) : (
+                <CaretRightOutlined onClick={(e) => onExpand(record, e)} />
+              )
+          }}
+        />
+      </Col>
       <Modal
         title={`Send message`}
         style={{ top: 20 }}
@@ -145,5 +143,6 @@ export default function Subject() {
           </Form.Item>
         </Form>
       </Modal>
-    </>)
+    </Row>
+  )
 }

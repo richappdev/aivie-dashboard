@@ -46,5 +46,5 @@ export default function IcfDocument() {
     })
     // setSubjects()
   }, []);
-  return (<Table style={{ width: "100vh" }} columns={columns} dataSource={icfDocuments} />)
+  return (<Table columns={columns} dataSource={icfDocuments} />)
 }
