@@ -17,7 +17,6 @@ export default function PatientInfoCard({ ...props }) {
       doctor: NONE,
       study_nurse: NONE,
       caregiver: NONE,
-      patient: NONE
     },
     {
       key: '2',
@@ -27,7 +26,6 @@ export default function PatientInfoCard({ ...props }) {
       doctor: EDIT_AND_VIEW,
       study_nurse: EDIT_AND_VIEW,
       caregiver: NONE,
-      patient: NONE
     },
     {
       key: '3',
@@ -37,7 +35,6 @@ export default function PatientInfoCard({ ...props }) {
       doctor: EDIT_AND_VIEW,
       study_nurse: EDIT_AND_VIEW,
       caregiver: VIEW_ONLY,
-      patient: NO_ACCESS
     },
   ];
 
@@ -45,13 +42,13 @@ export default function PatientInfoCard({ ...props }) {
     console.log(text);
     switch (text) {
       case EDIT_AND_VIEW:
-        return (<CheckCircleTwoTone twoToneColor="#52c41a"/>)
+        return (<CheckCircleTwoTone twoToneColor="#52c41a" />)
       case VIEW_ONLY:
-        return (<ExclamationCircleTwoTone/>)
+        return (<ExclamationCircleTwoTone />)
       case VIEW_QUERY_ONLY:
         return (<WarningTwoTone twoToneColor="#f1c232" />)
       case NO_ACCESS:
-        return (<StopTwoTone twoToneColor="#f44336"/>)
+        return (<StopTwoTone twoToneColor="#f44336" />)
       default:
         return (<></>)
     }
@@ -93,16 +90,17 @@ export default function PatientInfoCard({ ...props }) {
       key: 'caregiver',
       render: render
     },
-    {
-      title: 'Patient',
-      dataIndex: 'patient',
-      key: 'patient',
-      render: render
-    },
   ];
 
-  return (<div>
-    <h2>Permission</h2>
-    <Table dataSource={dataSource} columns={columns} />
-  </div>)
+  return (
+    <div>
+      <h2>Permission</h2>
+      <Table dataSource={dataSource} columns={columns} />
+      <div>
+        <CheckCircleTwoTone twoToneColor="#52c41a" /> Edit and View<br />
+        <ExclamationCircleTwoTone /> View Only<br />
+        <WarningTwoTone twoToneColor="#f1c232" /> View and Query Only<br />
+        <StopTwoTone twoToneColor="#f44336" /> No Access<br />
+      </div>
+    </div>)
 }
