@@ -1,6 +1,6 @@
 import { Card, Row, Col, Space, Statistic, Button } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
-import { Pie } from '@ant-design/charts';
+import { Pie, Column } from '@ant-design/charts';
 import { RingProgress, Progress } from '@ant-design/charts';
 import { DownloadOutlined } from "@ant-design/icons"
 
@@ -24,18 +24,37 @@ export default function StudyOverview() {
 
   const adverseEventData = [];
   for (let i = 0; i < 12; i += 1) {
+    const type = (i % 3 ? 'AE' : 'SAE')
     adverseEventData.push({
-      x: `AE${i + 1}`,
-      y: Math.floor(Math.random() * 1000) + 200,
+      type: type,
+      x: `${type}${i + 1}`,
+      y: Math.floor(Math.random() * 50),
     });
   }
+
   const deviationData = [];
   for (let i = 0; i < 12; i += 1) {
     deviationData.push({
       x: `DV${i + 1}`,
-      y: Math.floor(Math.random() * 1000) + 200,
+      y: Math.floor(Math.random() * 50),
     });
   }
+
+  const aeBarConfig = {
+    data: adverseEventData,
+    xField: 'x',
+    yField: 'y',
+    seriesField: 'type',
+    color: (_ref) => _ref.type === "AE" ? '#5B8FF9' : '#F4664A'
+  };
+
+  const siteData = [
+    { site: "US", count: 5 },
+    { site: "CA", count: 3 },
+    { site: "CN", count: 4 },
+    { site: "TW", count: 10 },
+    { site: "AUS", count: 5 }
+  ]
 
   return (<div>
 
@@ -50,14 +69,10 @@ export default function StudyOverview() {
             <p>14122A</p>
           </Card>
           <Card title="Total site">
-            <p>20</p>
+            {siteData.map(s => s.count).reduce((a, b) => a + b)}
           </Card>
           <Card title="Site Allocation">
-            <p>US - 5</p>
-            <p>CA - 5</p>
-            <p>CN - 5</p>
-            <p>TW - 5</p>
-            <p>AUS - 5</p>
+            {siteData.map(s => <p key={s.site}>{s.site} - {s.count}</p>)}
           </Card>
         </Space>
       </Col>
@@ -91,10 +106,10 @@ export default function StudyOverview() {
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Study Achieve" style={{ height: "100%" }}>
+            <Card title="Study Adherence" style={{ height: "100%" }}>
               <Statistic
-                title="Study Achieve"
-                value={11.28}
+                title="Study Adherence"
+                value={88}
                 precision={2}
                 // valueStyle={{ color: '#3f8600' }}
                 suffix="%"
@@ -105,7 +120,7 @@ export default function StudyOverview() {
         <Row style={{ width: "100%" }}>
           <Col span={12}>
             <Card title="Adverse Event">
-              <Bar height={200} data={adverseEventData} />
+              <Column {...aeBarConfig} height={200} />
             </Card>
           </Col>
           <Col span={12}>
