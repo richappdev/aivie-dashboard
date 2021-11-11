@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Steps, Space, Row, Col, Statistic } from 'antd';
+import moment from 'moment'
 
 const { Step } = Steps;
 
@@ -29,7 +30,7 @@ export default function PatientDetail() {
         <Col span={12}>
           <Card size="small" title="Patient IP Adherence">
             <Statistic
-              value={88.0}
+              value={90.0}
               precision={2}
               suffix="%"
             />
@@ -42,8 +43,8 @@ export default function PatientDetail() {
           <p>Diarrhea 7 day</p>
         </Card></Col>
         <Col span={8}><Card size="small" title="SAE">
-          <p>(Hospitalization onset date-resolve date)</p>
-          <p>2021-10-01~2021-11-15</p>
+          <p>Hospitalization onset date-resolve date</p>
+          <p>{moment().add(-4, 'days').format("YYYY-MM-DD")} ~ {moment().format("YYYY-MM-DD")}</p>
         </Card></Col>
         <Col span={8}><Card size="small" title="Drug Interruption">Yes</Card></Col>
       </Row>
