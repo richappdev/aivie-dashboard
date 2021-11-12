@@ -2,6 +2,7 @@ import { Card, Row, Col, Statistic, Space, Button } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
 import { RingProgress, Progress } from '@ant-design/charts';
 import { DownloadOutlined } from "@ant-design/icons"
+import AdverseEventCard from "./AdverseEventCard";
 
 export default function SiteOverview() {
   const patientConfig = {
@@ -21,20 +22,20 @@ export default function SiteOverview() {
     color: ['#5B8FF9', '#E8EDF3'],
   };
 
-  const adverseEventData = [];
-  for (let i = 0; i < 12; i += 1) {
-    adverseEventData.push({
-      x: `AE${i + 1}`,
-      y: Math.floor(Math.random() * 1000) + 200,
-    });
-  }
   const deviationData = [];
   for (let i = 0; i < 12; i += 1) {
     deviationData.push({
       x: `DV${i + 1}`,
-      y: Math.floor(Math.random() * 1000) + 200,
+      y: Math.floor(Math.random() * 50),
     });
   }
+
+  const studyTeams = [
+    { id: 1, name: "Dr. Jane Doe" },
+    { id: 2, name: "Dr. Ken Knox" },
+    { id: 3, name: "Bruce Wayne" },
+    { id: 4, name: "Carol Lee" }
+  ]
 
   return (<div>
     <Row gutter={[8, 8]}>
@@ -48,8 +49,7 @@ export default function SiteOverview() {
             <p>NTUH</p>
           </Card>
           <Card title="Study Team">
-            <p>Study Team1</p>
-            <p>Study Team2</p>
+            {studyTeams.map(t => <p key={t.id}>{t.name}</p>)}
           </Card>
         </Space>
       </Col>
@@ -61,9 +61,7 @@ export default function SiteOverview() {
               <RingProgress {...patientConfig} />
             </Row>
           </Card>
-          <Card title="Adverse Event">
-            <Bar height={200} data={adverseEventData} />
-          </Card>
+          <AdverseEventCard />
         </Space>
       </Col>
       <Col span={10}>

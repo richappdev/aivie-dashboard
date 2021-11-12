@@ -1,8 +1,9 @@
 import { Card, Row, Col, Space, Statistic, Button } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
-import { Pie, Column } from '@ant-design/charts';
+import { Pie } from '@ant-design/charts';
 import { RingProgress, Progress } from '@ant-design/charts';
 import { DownloadOutlined } from "@ant-design/icons"
+import AdverseEventCard from "./AdverseEventCard";
 
 export default function StudyOverview() {
   const patientConfig = {
@@ -22,16 +23,6 @@ export default function StudyOverview() {
     color: ['#5B8FF9', '#E8EDF3'],
   };
 
-  const adverseEventData = [];
-  for (let i = 0; i < 12; i += 1) {
-    const type = (i % 3 ? 'AE' : 'SAE')
-    adverseEventData.push({
-      type: type,
-      x: `${type}${i + 1}`,
-      y: Math.floor(Math.random() * 50),
-    });
-  }
-
   const deviationData = [];
   for (let i = 0; i < 12; i += 1) {
     deviationData.push({
@@ -39,14 +30,6 @@ export default function StudyOverview() {
       y: Math.floor(Math.random() * 50),
     });
   }
-
-  const aeBarConfig = {
-    data: adverseEventData,
-    xField: 'x',
-    yField: 'y',
-    seriesField: 'type',
-    color: (_ref) => _ref.type === "AE" ? '#5B8FF9' : '#F4664A'
-  };
 
   const siteData = [
     { site: "US", count: 5 },
@@ -57,7 +40,6 @@ export default function StudyOverview() {
   ]
 
   return (<div>
-
     <Row gutter={[8, 8]}>
       <Col span={22}><h2>Study Overview</h2></Col>
       <Col span={2}>
@@ -119,9 +101,7 @@ export default function StudyOverview() {
         </Row>
         <Row style={{ width: "100%" }}>
           <Col span={12}>
-            <Card title="Adverse Event">
-              <Column {...aeBarConfig} height={200} />
-            </Card>
+            <AdverseEventCard />
           </Col>
           <Col span={12}>
             <Card title="Deviation">
