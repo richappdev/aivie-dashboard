@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-// import Dashboard from './Dashboard'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
 import SiteOverview from './SiteOverview'
 import StudyOverview from './StudyOverview'
 import PermissionTable from './PermissionTable'
 import { Link, Redirect, withRouter } from 'react-router-dom'
-import { Layout, Menu, Button } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Switch, Route } from 'react-router-dom'
+import {
+  AuditOutlined,
+  MedicineBoxOutlined,
+  KeyOutlined,
+  TeamOutlined,
+  BookOutlined
+} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../App.css';
 
@@ -52,7 +58,7 @@ export default function Home() {
 
 const RightContent = () => {
   return (
-    <Content style={{ width: "100%", padding: '24px', alignSelf: 'center' }}>
+    <Content style={{ minHeight: '100vh', width: "100%", padding: '24px', alignSelf: 'center' }}>
       <Switch>
         {/* <Route path="/dashboard" component={Dashboard} /> */}
         <Route path="/permission" component={PermissionTable} />
@@ -73,8 +79,14 @@ const LeftSider = withRouter(({ history }) => {
     logout()
   }
 
+  const [collapsed, setCollapsed] = useState(true);
+  const onCollapse = () => setCollapsed(!collapsed)
+
   return (
-    <Sider style={{ height: "auto", background: "#EFD3DF" }}>
+    <Sider theme="light"
+      collapsible collapsed={collapsed}
+      onCollapse={onCollapse}
+      style={{ height: "auto" }}>
       <Menu
         mode="inline"
         defaultSelectedKeys={['/dashboard']}
@@ -83,29 +95,29 @@ const LeftSider = withRouter(({ history }) => {
           <Link to="/dashboard" />
           Dashboard
         </Menu.Item> */}
-        <Menu.Item key="permission">
+        <Menu.Item key="permission" icon={<KeyOutlined />}>
           <Link to="/permission" />
-          Permission
+          <strong>Permission</strong>
         </Menu.Item>
-        <Menu.Item key="subjects">
+        <Menu.Item key="subjects" icon={<TeamOutlined />}>
           <Link to="/subjects" />
-          Patient Overview
+          <strong>Patient Overview</strong>
         </Menu.Item>
-        <Menu.Item key="study_overview">
+        <Menu.Item key="study_overview" icon={<BookOutlined />}>
           <Link to="/study_overview" />
-          Study Overview
+          <strong>Study Overview</strong>
         </Menu.Item>
-        <Menu.Item key="site_overview">
+        <Menu.Item key="site_overview" icon={<MedicineBoxOutlined />}>
           <Link to="/site_overview" />
-          Site Overview
+          <strong>Site Overview</strong>
         </Menu.Item>
-        <Menu.Item key="icf_documents">
+        <Menu.Item key="icf_documents" icon={<AuditOutlined />}>
           <Link to="/icf_documents" />
-          ICF Documents
+          <strong>ICF Documents</strong>
         </Menu.Item>
-        <Menu.Item key="logout">
+        {/* <Menu.Item key="logout">
           <Button onClick={handleLogout}>Logout</Button>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </Sider>
   );
