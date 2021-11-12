@@ -1,8 +1,8 @@
-import { Card, Row, Col, Space, Statistic, Button } from "antd"
+import { Card, Row, Col, Space, Statistic } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
 import { Pie } from '@ant-design/charts';
 import { RingProgress, Progress } from '@ant-design/charts';
-import { DownloadOutlined } from "@ant-design/icons"
+import ExportDropdown from "./ExportDropdown";
 import AdverseEventCard from "./AdverseEventCard";
 
 export default function StudyOverview() {
@@ -39,11 +39,21 @@ export default function StudyOverview() {
     { site: "AUS", count: 5 }
   ]
 
+  const exportItems = [
+    "Site Allocation",
+    "Patient Recurrent",
+    "Patient",
+    "ICF",
+    "Study Adherence",
+    "Adverse Event",
+    "Deviation"
+  ]
+
   return (<div>
     <Row gutter={[8, 8]}>
       <Col span={22}><h2>Study Overview</h2></Col>
       <Col span={2}>
-        <Button type="primary"><DownloadOutlined /></Button>
+        <ExportDropdown items={exportItems} />
       </Col>
       <Col span={4}>
         <Space direction="vertical" style={{ width: "100%" }}>

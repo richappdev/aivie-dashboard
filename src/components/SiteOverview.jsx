@@ -1,7 +1,7 @@
-import { Card, Row, Col, Statistic, Space, Button } from "antd"
+import { Card, Row, Col, Statistic, Space } from "antd"
 import { Bar } from 'ant-design-pro/lib/Charts';
 import { RingProgress, Progress } from '@ant-design/charts';
-import { DownloadOutlined } from "@ant-design/icons"
+import ExportDropdown from "./ExportDropdown";
 import AdverseEventCard from "./AdverseEventCard";
 
 export default function SiteOverview() {
@@ -37,11 +37,19 @@ export default function SiteOverview() {
     { id: 4, name: "Carol Lee" }
   ]
 
+  const exportItems = [
+    "Study Team",
+    "Patient",
+    "ICF",
+    "Adverse Event",
+    "Deviation"
+  ]
+
   return (<div>
     <Row gutter={[8, 8]}>
       <Col span={22}><h2>Site Overview</h2></Col>
       <Col span={2}>
-        <Button type="primary"><DownloadOutlined /></Button>
+      <ExportDropdown items={exportItems} />
       </Col>
       <Col span={4}>
         <Space direction="vertical" style={{ width: "100%" }}>
