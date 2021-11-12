@@ -71,7 +71,7 @@ export default function StudyOverview() {
       <Col span={20}>
         <Card title="Patient Recurrent">
           <Row>
-            <Space direction="horizontal">
+            <Space direction="horizontal" size={40}>
               <Statistic title="Target Progress" value={5} suffix="/ 10" />
               <RingProgress {...patientConfig} />
               <div>
