@@ -6,14 +6,16 @@ import SiteOverview from './SiteOverview'
 import StudyOverview from './StudyOverview'
 import PermissionTable from './PermissionTable'
 import { Link, Redirect, withRouter } from 'react-router-dom'
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Row, Col, Dropdown, Avatar } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import {
   AuditOutlined,
   MedicineBoxOutlined,
   KeyOutlined,
   TeamOutlined,
-  BookOutlined
+  BookOutlined,
+  LogoutOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../App.css';
@@ -42,17 +44,36 @@ export default function Home() {
 
   //   setLoading(false)
   // }
+  const { logout } = useAuth()
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="1" icon={<UserOutlined />}>
+        Profile (TBD)
+      </Menu.Item>
+      <Menu.Item key="2" onClick={logout} icon={<LogoutOutlined />}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <Layout>
       <Header style={{ backgroundColor: "#E5BFCB" }}>
-        <h1>
-          <a href="/permission" style={{ color: "#FFF" }}>
-            <img src={logoImg} alt="logo" height={50} />
-            AIVIE
-          </a>
-        </h1>
+        <Row>
+          <Col>
+            <h1><a href="/permission" style={{ color: "#FFF" }}>
+              <img src={logoImg} alt="logo" height={50} />AIVIE
+            </a></h1>
+          </Col>
+          <Col push={22}>
+            <Dropdown overlay={menu}>
+              <a href style={{ color: "#FFF" }}>
+                <Avatar src="https://joeschmoe.io/api/v1/random" size="large" icon={<UserOutlined />} />
+              </a>
+            </Dropdown>
+          </Col>
+        </Row>
       </Header>
       <Layout>
         <LeftSider></LeftSider>
@@ -79,11 +100,6 @@ const RightContent = () => {
 }
 
 const LeftSider = withRouter(({ history }) => {
-  const { logout } = useAuth()
-
-  const handleLogout = () => {
-    logout()
-  }
 
   const [collapsed, setCollapsed] = useState(true);
   const onCollapse = () => setCollapsed(!collapsed)
