@@ -17,6 +17,7 @@ import {
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../App.css';
+import logoImg from '../image/aivie.png'
 
 const { Header, Content, Sider } = Layout;
 
@@ -46,7 +47,12 @@ export default function Home() {
   return (
     <Layout>
       <Header style={{ backgroundColor: "#E5BFCB" }}>
-        <h1 style={{ color: "#FFF" }}>AIVIE</h1>
+        <h1>
+          <a href="/permission" style={{ color: "#FFF" }}>
+            <img src={logoImg} alt="logo" height={50} />
+            AIVIE
+          </a>
+        </h1>
       </Header>
       <Layout>
         <LeftSider></LeftSider>
@@ -66,7 +72,7 @@ const RightContent = () => {
         <Route path="/study_overview" component={StudyOverview} />
         <Route path="/site_overview" component={SiteOverview} />
         <Route path="/icf_documents" component={IcfDocument} />
-        <Redirect to="/subjects" />
+        <Redirect to="/permission" />
       </Switch>
     </Content>
   );
@@ -89,7 +95,7 @@ const LeftSider = withRouter(({ history }) => {
       style={{ height: "auto" }}>
       <Menu
         mode="inline"
-        defaultSelectedKeys={['/dashboard']}
+        defaultSelectedKeys={['/permission']}
       >
         {/* <Menu.Item key="dashboard">
           <Link to="/dashboard" />
