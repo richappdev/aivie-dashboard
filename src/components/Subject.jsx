@@ -33,7 +33,7 @@ export default function Subject() {
 
   const [subjects, setSubjects] = useState([])
   const [selectedSubject, setSelectedSubject] = useState(null)
-  const [expandedRowKeys, setExpandedRowKeys] = useState([])
+  const [expandedRowKey, setExpandedRowKey] = useState(undefined)
   const [loading, setLoading] = useState(true)
   const [sendingMessage, setSendingMessage] = useState(false)
   const [messageForm] = Form.useForm();
@@ -62,6 +62,11 @@ export default function Subject() {
       setLoading(false)
     })
   }, []);
+  // console.log(expandedRowKey);
+  // if (expandedRowKey !== undefined) {
+  //   console.log(subjects);
+  //   console.log(subjects.filter(s => s.key === expandedRowKey)[0]);
+  // }
 
   return (
     <>
@@ -74,7 +79,9 @@ export default function Subject() {
       <br /> */}
         <Col span={6}>
           <Affix offsetTop={80}>
-            <PatientInfoCard info={{}}></PatientInfoCard>
+            <PatientInfoCard
+              info={expandedRowKey ? subjects.filter(s => s.key === expandedRowKey)[0] : {}}>
+            </PatientInfoCard>
           </Affix>
         </Col>
         <Col span={18}>
@@ -83,11 +90,9 @@ export default function Subject() {
             bordered
             loading={loading}
             expandable={{
-              expandedRowKeys: expandedRowKeys,
+              expandedRowKeys: [expandedRowKey],
               onExpand: (expanded, record) => {
-                const keys = [];
-                if (expanded) keys.push(record.key);
-                setExpandedRowKeys(keys);
+                setExpandedRowKey(expanded ? record.key : undefined);
               },
               expandedRowRender: record => <PatientDetail></PatientDetail>,
               rowExpandable: record => record.name !== 'Not Expandable',
