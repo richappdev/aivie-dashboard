@@ -62,11 +62,6 @@ export default function Subject() {
       setLoading(false)
     })
   }, []);
-  // console.log(expandedRowKey);
-  // if (expandedRowKey !== undefined) {
-  //   console.log(subjects);
-  //   console.log(subjects.filter(s => s.key === expandedRowKey)[0]);
-  // }
 
   return (
     <>
