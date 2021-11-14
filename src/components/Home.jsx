@@ -6,7 +6,7 @@ import SiteOverview from './SiteOverview'
 import StudyOverview from './StudyOverview'
 import PermissionTable from './PermissionTable'
 import { Link, Redirect, withRouter } from 'react-router-dom'
-import { Layout, Menu, Col, Row, Dropdown, Avatar } from 'antd';
+import { Layout, Menu, Col, Row, Dropdown, Avatar, Affix } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import {
   AuditOutlined,
@@ -63,9 +63,9 @@ export default function Home() {
 
   return (
     <Layout>
+      <LeftSider collapsed={collapsed}></LeftSider>
       <Layout>
-        <LeftSider collapsed={collapsed}></LeftSider>
-        <Content style={{ minHeight: '100vh', width: "100%" }}>
+        <Affix offsetTop={0}>
           <Header style={{ padding: '0 24px', backgroundColor: "#E5BFCB" }}>
             <Row>
               <Col>
@@ -83,17 +83,17 @@ export default function Home() {
               </Col>
             </Row>
           </Header>
-          <Content style={{ padding: '24px', alignSelf: 'center' }}>
-            <Switch>
-              {/* <Route path="/dashboard" component={Dashboard} /> */}
-              <Route path="/permission" component={PermissionTable} />
-              <Route path="/subjects" component={Subject} />
-              <Route path="/study_overview" component={StudyOverview} />
-              <Route path="/site_overview" component={SiteOverview} />
-              <Route path="/icf_documents" component={IcfDocument} />
-              <Redirect to="/permission" />
-            </Switch>
-          </Content>
+        </Affix>
+        <Content style={{ padding: '24px', minHeight: '100vh', overflow: 'initial' }}>
+          <Switch>
+            {/* <Route path="/dashboard" component={Dashboard} /> */}
+            <Route path="/permission" component={PermissionTable} />
+            <Route path="/subjects" component={Subject} />
+            <Route path="/study_overview" component={StudyOverview} />
+            <Route path="/site_overview" component={SiteOverview} />
+            <Route path="/icf_documents" component={IcfDocument} />
+            <Redirect to="/permission" />
+          </Switch>
           <Footer style={{ textAlign: "center" }}>© 2021 AIVIE LLC</Footer>
         </Content>
       </Layout>
@@ -105,50 +105,51 @@ const LeftSider = withRouter(({ ...props }) => {
 
   return (
     <Sider theme="light"
-      collapsed={props.collapsed}
-      style={{ height: "auto" }}>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={['/permission']}
-      >
-        <div style={{ height: "32px", margin: "16px 16px 32px 16px" }}>
-          <a href="/permission" >
-            <Row style={{ alignItems: "center" }}>
-              <Col span={8}><img src={logoImg} alt="logo" height={48} /></Col>
-              <Col span={12}><h2 style={{ color: "#E5BFCB", margin: "16px 0" }}>
-                {props.collapsed ? "" : "AIVIE"}
-              </h2></Col>
-            </Row>
-          </a>
-        </div>
-        {/* <Menu.Item key="dashboard">
+      collapsed={props.collapsed}>
+      <Affix>
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={['/permission']}
+        >
+          <div style={{ height: "32px", margin: "16px 16px 32px 16px" }}>
+            <a href="/permission" >
+              <Row style={{ alignItems: "center" }}>
+                <Col span={8}><img src={logoImg} alt="logo" height={48} /></Col>
+                <Col span={12}><h2 style={{ color: "#E5BFCB", margin: "16px 0" }}>
+                  {props.collapsed ? "" : "AIVIE"}
+                </h2></Col>
+              </Row>
+            </a>
+          </div>
+          {/* <Menu.Item key="dashboard">
           <Link to="/dashboard" />
           Dashboard
         </Menu.Item> */}
-        <Menu.Item key="permission" icon={<KeyOutlined />}>
-          <Link to="/permission" />
-          <strong>Permission</strong>
-        </Menu.Item>
-        <Menu.Item key="subjects" icon={<TeamOutlined />}>
-          <Link to="/subjects" />
-          <strong>Patient Overview</strong>
-        </Menu.Item>
-        <Menu.Item key="study_overview" icon={<BookOutlined />}>
-          <Link to="/study_overview" />
-          <strong>Study Overview</strong>
-        </Menu.Item>
-        <Menu.Item key="site_overview" icon={<MedicineBoxOutlined />}>
-          <Link to="/site_overview" />
-          <strong>Site Overview</strong>
-        </Menu.Item>
-        <Menu.Item key="icf_documents" icon={<AuditOutlined />}>
-          <Link to="/icf_documents" />
-          <strong>ICF Documents</strong>
-        </Menu.Item>
-        {/* <Menu.Item key="logout">
+          <Menu.Item key="permission" icon={<KeyOutlined />}>
+            <Link to="/permission" />
+            <strong>Permission</strong>
+          </Menu.Item>
+          <Menu.Item key="subjects" icon={<TeamOutlined />}>
+            <Link to="/subjects" />
+            <strong>Patient Overview</strong>
+          </Menu.Item>
+          <Menu.Item key="study_overview" icon={<BookOutlined />}>
+            <Link to="/study_overview" />
+            <strong>Study Overview</strong>
+          </Menu.Item>
+          <Menu.Item key="site_overview" icon={<MedicineBoxOutlined />}>
+            <Link to="/site_overview" />
+            <strong>Site Overview</strong>
+          </Menu.Item>
+          <Menu.Item key="icf_documents" icon={<AuditOutlined />}>
+            <Link to="/icf_documents" />
+            <strong>ICF Documents</strong>
+          </Menu.Item>
+          {/* <Menu.Item key="logout">
           <Button onClick={handleLogout}>Logout</Button>
         </Menu.Item> */}
-      </Menu>
+        </Menu>
+      </Affix>
     </Sider>
   );
 })

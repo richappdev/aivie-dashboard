@@ -1,9 +1,10 @@
-import { Table, Modal, Row, Col, Button, Form, Input } from 'antd';
+import { Table, Modal, Row, Col, Button, Form, Input, Affix } from 'antd';
 import { useEffect, useState } from 'react';
 import { loadSubjects } from '../firebase';
 import { sendCloudMessage } from '../cloud_function';
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import PatientDetail from './PatientDetail';
+import PatientInfoCard from './PatientInfoCard';
 
 export default function Subject() {
 
@@ -20,11 +21,6 @@ export default function Subject() {
       key: 'email',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
       title: 'Action',
       key: 'action',
       render: (text, subject) => (
@@ -37,6 +33,7 @@ export default function Subject() {
 
   const [subjects, setSubjects] = useState([])
   const [selectedSubject, setSelectedSubject] = useState(null)
+  const [expandedRowKeys, setExpandedRowKeys] = useState([])
   const [loading, setLoading] = useState(true)
   const [sendingMessage, setSendingMessage] = useState(false)
   const [messageForm] = Form.useForm();
@@ -67,76 +64,88 @@ export default function Subject() {
   }, []);
 
   return (
-    <Row>
-      {/* 先隱藏群發按鈕 */}
-      {/* <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
+    <>
+      <h2>Patient Overview</h2>
+      <Row gutter={[8, 8]}>
+        {/* 先隱藏群發按鈕 */}
+        {/* <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
         Send Message to subjects</Button>
       <br />
       <br /> */}
-      <h2>Patient Overview</h2>
-      {/* <Col>
-          <PatientInfoCard style={{ width: "200px" }} info={{}}></PatientInfoCard>
-        </Col> */}
-      <Col span={24}>
-        <Table columns={columns} dataSource={subjects}
-          loading={loading}
-          expandable={{
-            expandedRowRender: record => <PatientDetail></PatientDetail>,
-            rowExpandable: record => record.name !== 'Not Expandable',
-            expandIcon: ({ expanded, onExpand, record }) =>
-              expanded ? (
-                <CaretDownOutlined onClick={(e) => onExpand(record, e)} />
-              ) : (
-                <CaretRightOutlined onClick={(e) => onExpand(record, e)} />
-              )
-          }}
-        />
-      </Col>
-      <Modal
-        title={`Send message`}
-        style={{ top: 20 }}
-        visible={selectedSubject}
-        onOk={() => setSelectedSubject(null)}
-        onCancel={() => setSelectedSubject(null)}
-        okButtonProps={{ disabled: sendingMessage }}
-        cancelButtonProps={{ disabled: sendingMessage }}
-      >
-        <div>Send List:</div>
-        {selectedSubject && selectedSubject.map(subject => (
-          <div>{subject.name}</div>
-        ))}
-        <Form
-          name="basic"
-          form={messageForm}
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
-          autoComplete="off"
-          onFinish={sendMessage}
+        <Col span={6}>
+          <Affix offsetTop={80}>
+            <PatientInfoCard info={{}}></PatientInfoCard>
+          </Affix>
+        </Col>
+        <Col span={18}>
+          <Table size="small" columns={columns} dataSource={subjects}
+            scroll={{ y: "70vh" }}
+            bordered
+            loading={loading}
+            expandable={{
+              expandedRowKeys: expandedRowKeys,
+              onExpand: (expanded, record) => {
+                const keys = [];
+                if (expanded) keys.push(record.key);
+                setExpandedRowKeys(keys);
+              },
+              expandedRowRender: record => <PatientDetail></PatientDetail>,
+              rowExpandable: record => record.name !== 'Not Expandable',
+              expandIcon: ({ expanded, onExpand, record }) =>
+                expanded ? (
+                  <CaretDownOutlined onClick={(e) => onExpand(record, e)} />
+                ) : (
+                  <CaretRightOutlined onClick={(e) => onExpand(record, e)} />
+                )
+            }}
+          />
+        </Col>
+        <Modal
+          title={`Send message`}
+          style={{ top: 20 }}
+          visible={selectedSubject}
+          onOk={() => setSelectedSubject(null)}
+          onCancel={() => setSelectedSubject(null)}
+          okButtonProps={{ disabled: sendingMessage }}
+          cancelButtonProps={{ disabled: sendingMessage }}
         >
-          <Form.Item
-            label="Title"
-            name="title"
-            rules={[{ required: true, message: 'enter message title' }]}
+          <div>Send List:</div>
+          {selectedSubject && selectedSubject.map(subject => (
+            <div>{subject.name}</div>
+          ))}
+          <Form
+            name="basic"
+            form={messageForm}
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            initialValues={{ remember: true }}
+            autoComplete="off"
+            onFinish={sendMessage}
           >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Title"
+              name="title"
+              rules={[{ required: true, message: 'enter message title' }]}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            label="Body"
-            name="body"
-            rules={[{ required: true, message: 'enter message body' }]}
-          >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Body"
+              name="body"
+              rules={[{ required: true, message: 'enter message body' }]}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button disabled={sendingMessage} type="primary" htmlType="submit">
-              Send Message
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </Row>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button disabled={sendingMessage} type="primary" htmlType="submit">
+                Send Message
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+      </Row>
+    </>
   )
 }
