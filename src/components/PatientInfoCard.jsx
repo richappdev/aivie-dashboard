@@ -25,7 +25,7 @@ export default function PatientInfoCard({ ...props }) {
           <center>
             <Button type="primary">View More</Button>
           </center>
-        </Space>) : (<div>Please a patient from list</div>)}
+        </Space>) : (<div>Please select a patient from list</div>)}
       </Card>
     </>
   )
