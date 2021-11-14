@@ -23,7 +23,7 @@ import 'antd/dist/antd.css';
 import '../App.css';
 import logoImg from '../image/aivie.png'
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content, Sider, Footer } = Layout;
 
 export default function Home() {
   // const [form] = Form.useForm()
@@ -94,6 +94,7 @@ export default function Home() {
               <Redirect to="/permission" />
             </Switch>
           </Content>
+          <Footer style={{ textAlign: "center" }}>© 2021 AIVIE LLC</Footer>
         </Content>
       </Layout>
     </Layout>
