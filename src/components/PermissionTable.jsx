@@ -39,7 +39,6 @@ export default function PatientInfoCard({ ...props }) {
   ];
 
   const render = (text, record) => {
-    console.log(text);
     switch (text) {
       case EDIT_AND_VIEW:
         return (<CheckCircleTwoTone twoToneColor="#52c41a" />)

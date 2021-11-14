@@ -6,7 +6,7 @@ import SiteOverview from './SiteOverview'
 import StudyOverview from './StudyOverview'
 import PermissionTable from './PermissionTable'
 import { Link, Redirect, withRouter } from 'react-router-dom'
-import { Layout, Menu, Row, Col, Dropdown, Avatar } from 'antd';
+import { Layout, Menu, Col, Row, Dropdown, Avatar } from 'antd';
 import { Switch, Route } from 'react-router-dom'
 import {
   AuditOutlined,
@@ -15,7 +15,9 @@ import {
   TeamOutlined,
   BookOutlined,
   LogoutOutlined,
-  UserOutlined
+  UserOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../App.css';
@@ -44,7 +46,9 @@ export default function Home() {
 
   //   setLoading(false)
   // }
+
   const { logout } = useAuth()
+  const [collapsed, setCollapsed] = useState(true)
 
   const menu = (
     <Menu>
@@ -59,60 +63,63 @@ export default function Home() {
 
   return (
     <Layout>
-      <Header style={{ backgroundColor: "#E5BFCB" }}>
-        <Row>
-          <Col>
-            <h1><a href="/permission" style={{ color: "#FFF" }}>
-              <img src={logoImg} alt="logo" height={50} />AIVIE
-            </a></h1>
-          </Col>
-          <Col push={22}>
-            <Dropdown overlay={menu}>
-              <a href style={{ color: "#FFF" }}>
-                <Avatar src="https://joeschmoe.io/api/v1/random" size="large" icon={<UserOutlined />} />
-              </a>
-            </Dropdown>
-          </Col>
-        </Row>
-      </Header>
       <Layout>
-        <LeftSider></LeftSider>
-        <RightContent></RightContent>
+        <LeftSider collapsed={collapsed}></LeftSider>
+        <Content style={{ minHeight: '100vh', width: "100%" }}>
+          <Header style={{ padding: '0 24px', backgroundColor: "#E5BFCB" }}>
+            <Row>
+              <Col>
+                {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                  style: { cursor: 'pointer', color: "#FFF" },
+                  onClick: () => setCollapsed(!collapsed),
+                })}
+              </Col>
+              <Col push={23}>
+                <Dropdown overlay={menu}>
+                  <a href style={{ color: "#FFF" }}>
+                    <Avatar src="https://joeschmoe.io/api/v1/random" size="large" icon={<UserOutlined />} />
+                  </a>
+                </Dropdown>
+              </Col>
+            </Row>
+          </Header>
+          <Content style={{ padding: '24px', alignSelf: 'center' }}>
+            <Switch>
+              {/* <Route path="/dashboard" component={Dashboard} /> */}
+              <Route path="/permission" component={PermissionTable} />
+              <Route path="/subjects" component={Subject} />
+              <Route path="/study_overview" component={StudyOverview} />
+              <Route path="/site_overview" component={SiteOverview} />
+              <Route path="/icf_documents" component={IcfDocument} />
+              <Redirect to="/permission" />
+            </Switch>
+          </Content>
+        </Content>
       </Layout>
     </Layout>
   )
 }
 
-const RightContent = () => {
-  return (
-    <Content style={{ minHeight: '100vh', width: "100%", padding: '24px', alignSelf: 'center' }}>
-      <Switch>
-        {/* <Route path="/dashboard" component={Dashboard} /> */}
-        <Route path="/permission" component={PermissionTable} />
-        <Route path="/subjects" component={Subject} />
-        <Route path="/study_overview" component={StudyOverview} />
-        <Route path="/site_overview" component={SiteOverview} />
-        <Route path="/icf_documents" component={IcfDocument} />
-        <Redirect to="/permission" />
-      </Switch>
-    </Content>
-  );
-}
-
-const LeftSider = withRouter(({ history }) => {
-
-  const [collapsed, setCollapsed] = useState(true);
-  const onCollapse = () => setCollapsed(!collapsed)
+const LeftSider = withRouter(({ ...props }) => {
 
   return (
     <Sider theme="light"
-      collapsible collapsed={collapsed}
-      onCollapse={onCollapse}
+      collapsed={props.collapsed}
       style={{ height: "auto" }}>
       <Menu
         mode="inline"
         defaultSelectedKeys={['/permission']}
       >
+        <div style={{ height: "32px", margin: "16px 16px 32px 16px" }}>
+          <a href="/permission" >
+            <Row style={{ alignItems: "center" }}>
+              <Col span={8}><img src={logoImg} alt="logo" height={48} /></Col>
+              <Col span={12}><h2 style={{ color: "#E5BFCB", margin: "16px 0" }}>
+                {props.collapsed ? "" : "AIVIE"}
+              </h2></Col>
+            </Row>
+          </a>
+        </div>
         {/* <Menu.Item key="dashboard">
           <Link to="/dashboard" />
           Dashboard
