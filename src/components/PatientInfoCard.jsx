@@ -4,13 +4,13 @@ import { UserOutlined } from "@ant-design/icons"
 import moment from 'moment';
 
 export default function PatientInfoCard({ ...props }) {
-  const { name, gender, birthday, key, email, photo, height, weight } = props.info
+  const { name, gender, birthday, key, email, height, weight, photoUrl } = props.info
   return (
     <>
       <Card style={{ ...props.style }} size="small" title="Patient Info">
         <div>
           <center>
-            <Avatar src={photo} size={64} icon={<UserOutlined />} />
+            <Avatar src={photoUrl} size={64} icon={<UserOutlined />} />
           </center>
           <h2 style={{ textAlign: "center" }}>{name}</h2>
         </div>

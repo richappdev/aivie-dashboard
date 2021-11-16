@@ -1,6 +1,6 @@
 import { Table, Modal, Row, Col, Button, Form, Input, Affix } from 'antd';
 import { useEffect, useState } from 'react';
-import { loadSubjects } from '../firebase';
+import { loadSubjects, fetchUserPhoto } from '../firebase';
 import { sendCloudMessage } from '../cloud_function';
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import PatientDetail from './PatientDetail';
@@ -57,7 +57,10 @@ export default function Subject() {
 
   useEffect(() => {
     setLoading(true)
-    loadSubjects().then((value) => {
+    loadSubjects().then(async (value) => {
+      value.forEach(async (doc) => {
+        doc.photoUrl = await fetchUserPhoto(doc)
+      })
       setSubjects(value)
       setLoading(false)
     })

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { loadProfile, fetchUserPhoto } from '../firebase';
 import { useAuth } from '../context/AuthContext'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
@@ -47,8 +48,17 @@ export default function Home() {
   //   setLoading(false)
   // }
 
-  const { logout } = useAuth()
+  const { logout, currentUser } = useAuth()
   const [collapsed, setCollapsed] = useState(true)
+  const [profile, setProfile] = useState(undefined)
+  useEffect(() => {
+    loadProfile(currentUser.uid).then(async (value) => {
+      const photoUrl = await fetchUserPhoto(value);
+      value.photoUrl = photoUrl
+      setProfile(value)
+    })
+  }, [currentUser]);
+
 
   const menu = (
     <Menu>
@@ -77,7 +87,7 @@ export default function Home() {
               <Col push={23}>
                 <Dropdown overlay={menu}>
                   <a href style={{ color: "#FFF" }}>
-                    <Avatar src="https://joeschmoe.io/api/v1/random" size="large" icon={<UserOutlined />} />
+                    {profile && <Avatar src={profile.photoUrl ?? ""} size="large" icon={<UserOutlined />} />}
                   </a>
                 </Dropdown>
               </Col>
