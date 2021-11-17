@@ -31,6 +31,21 @@ export default function StudyOverview() {
     });
   }
 
+  // const patientRecurrentData = [
+  //   { name: "Active" },
+  //   { name: "Completed" },
+  //   { name: "Screen Failure" },
+  //   { name: "Withdraw" },
+  //   { name: "On Treatment" },
+  //   { name: "Early Termination" },
+  // ]
+
+  // patientRecurrentData.forEach(e => { e.value = Math.floor(Math.random() * 100) })
+  // console.log(patientRecurrentData);
+  // const patientRecurrentTotal = patientRecurrentData.map(e => e.value).reduce((a, b) => (a + b))
+  // console.log(patientRecurrentTotal);
+  // patientRecurrentData.map(e => ({ ...e, value: e.value * 100 / patientRecurrentTotal }))
+
   const siteData = [
     { site: "US", count: 5 },
     { site: "CA", count: 3 },
@@ -84,6 +99,7 @@ export default function StudyOverview() {
                 <p>Withdraw: x</p>
                 <p>Early Termination: x</p>
               </div>
+              {/* {patientRecurrentData.map(e => <div key={e.name}>{e.name}: {e.value}</div>)} */}
             </Space>
           </Row>
         </Card>

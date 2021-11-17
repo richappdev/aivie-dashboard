@@ -55,26 +55,30 @@ export default function Subject() {
     setSendingMessage(true)
   }
 
-  useEffect(() => {
+  useEffect(() => { onSearch("") }, []);
+
+  const onSearch = (text) => {
     setLoading(true)
-    loadSubjects().then(async (value) => {
+    loadSubjects().then((value) => {
+      setSubjects(value.filter(s => (s.name.includes(text)) || s.email.includes(text)))
       value.forEach(async (doc) => {
         doc.photoUrl = await fetchUserPhoto(doc)
       })
       setSubjects(value)
       setLoading(false)
     })
-  }, []);
+  }
 
   return (
     <>
-      <h2>Patient Overview</h2>
       <Row gutter={[8, 8]}>
         {/* 先隱藏群發按鈕 */}
         {/* <Button type="primary" onClick={() => setSelectedSubject(subjects)}>
         Send Message to subjects</Button>
       <br />
       <br /> */}
+        <Col span={6}><h2>Patient Overview</h2></Col>
+        <Col span={18}><Input.Search placeholder="Search by Name or Email" onSearch={onSearch} style={{ width: 'auto' }} /></Col>
         <Col span={6}>
           <Affix offsetTop={80}>
             <PatientInfoCard
