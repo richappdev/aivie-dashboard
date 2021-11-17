@@ -10,7 +10,7 @@ export default function PatientInfoCard({ ...props }) {
       <Card style={{ ...props.style }} size="small" title="Patient Info">
         <div>
           <center>
-            <Avatar src={photoUrl} size={64} icon={<UserOutlined />} />
+            <Avatar src={photoUrl} size={96} icon={<UserOutlined />} />
           </center>
           <h2 style={{ textAlign: "center" }}>{name}</h2>
         </div>

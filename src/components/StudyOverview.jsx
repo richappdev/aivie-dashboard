@@ -31,20 +31,33 @@ export default function StudyOverview() {
     });
   }
 
-  // const patientRecurrentData = [
-  //   { name: "Active" },
-  //   { name: "Completed" },
-  //   { name: "Screen Failure" },
-  //   { name: "Withdraw" },
-  //   { name: "On Treatment" },
-  //   { name: "Early Termination" },
-  // ]
+  function randombetween(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
-  // patientRecurrentData.forEach(e => { e.value = Math.floor(Math.random() * 100) })
-  // console.log(patientRecurrentData);
-  // const patientRecurrentTotal = patientRecurrentData.map(e => e.value).reduce((a, b) => (a + b))
-  // console.log(patientRecurrentTotal);
-  // patientRecurrentData.map(e => ({ ...e, value: e.value * 100 / patientRecurrentTotal }))
+  function generate(max, thecount) {
+    var r = [];
+    var currsum = 0;
+    for (var i = 0; i < thecount - 1; i++) {
+      r[i] = randombetween(1, max - (thecount - i - 1) - currsum);
+      currsum += r[i];
+    }
+    r[thecount - 1] = max - currsum;
+    return r;
+  }
+
+  const patientRecurrentData = [
+    { name: "Active" },
+    { name: "Completed" },
+    { name: "Screen Failure" },
+    { name: "Withdraw" },
+    { name: "On Treatment" },
+    { name: "Early Termination" },
+  ]
+
+  const patientValues = generate(100, patientRecurrentData.length)
+
+  patientRecurrentData.forEach((e, i) => { e.value = patientValues[i] })
 
   const siteData = [
     { site: "US", count: 5 },
@@ -89,7 +102,7 @@ export default function StudyOverview() {
             <Space direction="horizontal" size={40}>
               <Statistic title="Target Progress" value={5} suffix="/ 10" />
               <RingProgress {...patientConfig} />
-              <div>
+              {/* <div>
                 <p>Active: x</p>
                 <p>Screen Failure: x</p>
                 <p>On Treatment: x</p>
@@ -98,8 +111,8 @@ export default function StudyOverview() {
                 <p>Completed: x</p>
                 <p>Withdraw: x</p>
                 <p>Early Termination: x</p>
-              </div>
-              {/* {patientRecurrentData.map(e => <div key={e.name}>{e.name}: {e.value}</div>)} */}
+              </div> */}
+              <Row>{patientRecurrentData.map(e => <Col key={e.name} span={12}>{e.name}: {e.value}</Col>)}</Row>
             </Space>
           </Row>
         </Card>
