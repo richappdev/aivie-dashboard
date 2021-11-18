@@ -16,6 +16,7 @@ const db = app.firestore()
 const storage = app.storage()
 const icfDocumentCollection = db.collection('ICFDocuments')
 const subjectCollection = db.collection('subjects')
+const organizationCollection = db.collection('organizations')
 const studyId = process.env.REACT_APP_AIVIE_STUDY
 
 export const loadSubjects = async () => {
@@ -39,6 +40,13 @@ export const loadIcfDocuments = async () => {
     .docs.map(doc => ({ key: doc.id, ...doc.data() }))
   console.log(documents);
   return documents
+}
+
+export const loadOrganizations = async () => {
+  const organizations = await (await organizationCollection.orderBy('country').get())
+    .docs.map(doc => ({ key: doc.id, ...doc.data() }))
+  console.log(organizations);
+  return organizations
 }
 
 export const auth = app.auth()

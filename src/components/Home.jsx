@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import Subject from './Subject'
 import IcfDocument from './IcfDocument'
 import SiteOverview from './SiteOverview'
+import SiteTable from './SiteTable'
 import StudyOverview from './StudyOverview'
 import PermissionTable from './PermissionTable'
 import { Link, Redirect, withRouter } from 'react-router-dom'
@@ -100,7 +101,7 @@ export default function Home() {
             <Route path="/permission" component={PermissionTable} />
             <Route path="/subjects" component={Subject} />
             <Route path="/study_overview" component={StudyOverview} />
-            <Route path="/site_overview" component={SiteOverview} />
+            <Route path="/site_overview" component={SiteTable} />
             <Route path="/icf_documents" component={IcfDocument} />
             <Redirect to="/permission" />
           </Switch>
