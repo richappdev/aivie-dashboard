@@ -1,6 +1,41 @@
-# Getting Started with Create React App
+# AIVIE Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AIVIE 管理後台
+
+## 部署至Firebase
+
+### 專案建置
+
+```bash
+npm install   # 安裝套件
+npm run build # 建置專案
+```
+
+![專案建置成功訊息](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5e4f5872-e051-4552-ae63-0b5664fc9bd3/%E6%88%AA%E5%9C%96_2022-06-23_10.40.02.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220623%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220623T024927Z&X-Amz-Expires=86400&X-Amz-Signature=566dbd333be6fab255b1f837d2f1acc60575d24c29046e52bd43e40dc5b7b230&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25E6%2588%25AA%25E5%259C%2596%25202022-06-23%252010.40.02.png%22&x-id=GetObject)
+
+專案建置成功訊息
+
+### Firebase CLI部署
+
+1. Firebase CLI登入
+
+```bash
+firebase login
+```
+
+![登入成功](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/816d3281-a93d-40cf-9361-e17adbc29c5f/%E6%88%AA%E5%9C%96_2022-06-23_10.33.15.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220623%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220623T024957Z&X-Amz-Expires=86400&X-Amz-Signature=09033b9b83a3b0694db0834294293643fe444cc61c0665ac7e25a1db9e72005d&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25E6%2588%25AA%25E5%259C%2596%25202022-06-23%252010.33.15.png%22&x-id=GetObject)
+
+登入成功
+
+2. 部署至Firebase Hosting
+
+```bash
+firebase deploy --only hosting
+```
+
+如果顯示帳號沒權限的問題，請聯絡管理員加入
+
+![部署成功訊息](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/893744cd-28d0-4312-b901-c509aba78981/%E6%88%AA%E5%9C%96_2022-06-23_10.44.39.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220623%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220623T025012Z&X-Amz-Expires=86400&X-Amz-Signature=7d63fce327a3c79a56d9adabc4be3d1705c8ee70609578b4cca7b41f189b84c6&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25E6%2588%25AA%25E5%259C%2596%25202022-06-23%252010.44.39.png%22&x-id=GetObject)
 
 ## Available Scripts
 
